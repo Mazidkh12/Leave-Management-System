@@ -2,6 +2,7 @@ package com.zidcode.leave_management_system.service.impl;
 
 import com.zidcode.leave_management_system.dto.EmployeeRequest;
 import com.zidcode.leave_management_system.dto.EmployeeResponse;
+import com.zidcode.leave_management_system.dto.EmployeeUpdateRequest;
 import com.zidcode.leave_management_system.entity.Department;
 import com.zidcode.leave_management_system.entity.Employee;
 import com.zidcode.leave_management_system.entity.Role;
@@ -71,7 +72,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeResponse updateEmployee(Long id, EmployeeRequest request) {
+    public EmployeeResponse updateEmployee(Long id, EmployeeUpdateRequest request) {
 
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() ->
@@ -121,7 +122,16 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .email(employee.getEmail())
                 .phone(employee.getPhone())
                 .joiningDate(employee.getJoiningDate())
-                .departmentName(employee.getDepartment().getDepartmentName())
+                .departmentId(
+                        employee.getDepartment() != null
+                                ? employee.getDepartment().getId()
+                                : null
+                )
+                .departmentName(
+                        employee.getDepartment() != null
+                                ? employee.getDepartment().getDepartmentName()
+                                : "Not Assigned"
+                )
                 .build();
     }
 }

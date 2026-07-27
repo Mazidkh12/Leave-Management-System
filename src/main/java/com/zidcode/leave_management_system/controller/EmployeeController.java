@@ -2,6 +2,7 @@ package com.zidcode.leave_management_system.controller;
 
 import com.zidcode.leave_management_system.dto.EmployeeRequest;
 import com.zidcode.leave_management_system.dto.EmployeeResponse;
+import com.zidcode.leave_management_system.dto.EmployeeUpdateRequest;
 import com.zidcode.leave_management_system.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -48,7 +49,7 @@ public class EmployeeController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<EmployeeResponse> updateEmployee(
             @PathVariable Long id,
-            @Valid @RequestBody EmployeeRequest request) {
+            @Valid @RequestBody EmployeeUpdateRequest request) {
 
         return ResponseEntity.ok(
                 employeeService.updateEmployee(id, request));
