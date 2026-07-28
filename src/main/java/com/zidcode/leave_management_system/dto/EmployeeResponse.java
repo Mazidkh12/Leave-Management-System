@@ -1,5 +1,6 @@
 package com.zidcode.leave_management_system.dto;
 
+import com.zidcode.leave_management_system.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,4 +29,6 @@ public class EmployeeResponse {
     private Long departmentId;
 
     private String departmentName;
+
+    private Role role;
 }

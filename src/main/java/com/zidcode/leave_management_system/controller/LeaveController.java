@@ -20,7 +20,7 @@ public class LeaveController {
     private final LeaveService leaveService;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('EMPLOYEE')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
     public ResponseEntity<LeaveResponseDto> applyLeave(
             @Valid @RequestBody LeaveRequestDto request) {
 
@@ -30,7 +30,7 @@ public class LeaveController {
     }
 
     @GetMapping("/my")
-    @PreAuthorize("hasAuthority('EMPLOYEE')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
     public ResponseEntity<List<LeaveResponseDto>> getMyLeaves() {
 
         return ResponseEntity.ok(leaveService.getMyLeaves());
@@ -62,7 +62,7 @@ public class LeaveController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('EMPLOYEE')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
     public ResponseEntity<String> cancelLeave(
             @PathVariable Long id) {
 

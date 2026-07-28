@@ -50,11 +50,15 @@ public class Employee implements UserDetails {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<LeaveRequest> leaveRequests = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (role == null) {
+            return List.of(new SimpleGrantedAuthority("EMPLOYEE"));
+        }
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
 

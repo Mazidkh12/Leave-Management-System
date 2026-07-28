@@ -14,7 +14,7 @@ public class DashboardController {
     private final DashboardService dashboardService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
     public DashboardResponseDto getDashboardSummary() {
 
         return dashboardService.getDashboardSummary();

@@ -132,6 +132,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                                 ? employee.getDepartment().getDepartmentName()
                                 : "Not Assigned"
                 )
+                .role(employee.getRole() != null ? employee.getRole() : Role.EMPLOYEE)
                 .build();
     }
 }
